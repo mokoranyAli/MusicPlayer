@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  MusicPlayer
+
+  Created by Mohamed Korany on 8/9/20.
+  Copyright © 2020 Mohamed Korany. All rights reserved.
+*/
+"changeLanguage" = "Change Language";
+"Menu" = "Menu";
+"Favorite" = "Favorite";
+"Home" = "Home";

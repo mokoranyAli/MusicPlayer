@@ -1,0 +1,30 @@
+PODS:
+  - Alamofire (5.2.2)
+  - Localize-Swift (3.1.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - SideMenuSwift (2.0.5)
+
+DEPENDENCIES:
+  - Localize-Swift
+  - Moya
+  - SideMenuSwift
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Localize-Swift
+    - Moya
+    - SideMenuSwift
+
+SPEC CHECKSUMS:
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Localize-Swift: 4bed4f0ccac8be2ec3517ee359da80ba2adb0fae
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  SideMenuSwift: c7d99c270e0fad922a14b81f1dcc7a84c764bcd5
+
+PODFILE CHECKSUM: a8ff224208616a863448365e57eca03011791fef
+
+COCOAPODS: 1.9.0
