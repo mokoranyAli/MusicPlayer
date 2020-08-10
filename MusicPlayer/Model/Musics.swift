@@ -24,11 +24,11 @@ import Foundation
 // MARK: - Result
 struct Result:Codable {
     var wrapperType, kind: String?
-    var artistID, collectionID, trackID: Int?
+    var artistId, collectionId, trackId: Int?
     var artistName, collectionName, trackName, collectionCensoredName: String?
     var trackCensoredName: String?
-    var artistViewURL, collectionViewURL, trackViewURL: String?
-    var previewURL: String?
+    var artistViewUrl, collectionViewUrl, trackViewUrl: String?
+    var previewUrl: String?
     var artworkUrl30, artworkUrl60, artworkUrl100: String?
     var collectionPrice, trackPrice: Double?
     var releaseDate, collectionExplicitness, trackExplicitness: String?
@@ -38,4 +38,7 @@ struct Result:Codable {
     var isStreamable: Bool?
     var collectionArtistID: Int?
     var collectionArtistName, contentAdvisoryRating: String?
+    
 }
+
+

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1E9A8E32F86A7221E62A09E5 /* Pods_MusicPlayer_MusicPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D747B4E7E2EEF9411BD388D /* Pods_MusicPlayer_MusicPlayerUITests.framework */; };
 		98C676C826E00C8A20B43218 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3E8AEC8581EB1205CE1046A /* Pods_MusicPlayer.framework */; };
+		A253DF1C24E141CA005B9160 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A253DF1B24E141CA005B9160 /* default.jpg */; };
+		A253DF1F24E18C07005B9160 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253DF1E24E18C07005B9160 /* PlayerViewController.swift */; };
+		A253DF2224E196A9005B9160 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253DF2124E196A9005B9160 /* BaseCardView.swift */; };
 		A25CA79924E050B700F3984C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A25CA79824E050B700F3984C /* Main.storyboard */; };
 		A25CA79B24E05B1800F3984C /* TrackCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CA79A24E05B1800F3984C /* TrackCellViewModel.swift */; };
 		A2C7E41C24E02D9100E8CC74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C7E41B24E02D9100E8CC74 /* AppDelegate.swift */; };
@@ -52,6 +55,9 @@
 		14841AE890BD501ED2EE91B0 /* Pods-MusicPlayer-MusicPlayerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer-MusicPlayerUITests.release.xcconfig"; path = "Target Support Files/Pods-MusicPlayer-MusicPlayerUITests/Pods-MusicPlayer-MusicPlayerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2D747B4E7E2EEF9411BD388D /* Pods_MusicPlayer_MusicPlayerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer_MusicPlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35CE4C91B33971D33B3641B9 /* Pods-MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.debug.xcconfig"; path = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		A253DF1B24E141CA005B9160 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
+		A253DF1E24E18C07005B9160 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		A253DF2124E196A9005B9160 /* BaseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardView.swift; sourceTree = "<group>"; };
 		A25CA79824E050B700F3984C /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A25CA79A24E05B1800F3984C /* TrackCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellViewModel.swift; sourceTree = "<group>"; };
 		A2C7E41824E02D9100E8CC74 /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,11 +136,98 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A253DF1424E139BB005B9160 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				A253DF1D24E18BDF005B9160 /* Player */,
+				A2C7E47324E04B9300E8CC74 /* Menu */,
+				A2C7E47424E04BA100E8CC74 /* Favorite */,
+				A253DF1524E139D1005B9160 /* Home */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		A253DF1524E139D1005B9160 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A253DF1824E13A2C005B9160 /* View */,
+				A253DF1724E139F0005B9160 /* Cell */,
+				A253DF1624E139D9005B9160 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A253DF1624E139D9005B9160 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A2C7E46624E0433300E8CC74 /* TracksViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A253DF1724E139F0005B9160 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A2C7E46024E0414100E8CC74 /* ITunesTrackCollectionViewCell.swift */,
+				A2C7E46124E0414100E8CC74 /* ITunesTrackCollectionViewCell.xib */,
+				A25CA79A24E05B1800F3984C /* TrackCellViewModel.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		A253DF1824E13A2C005B9160 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A2C7E43D24E02EEF00E8CC74 /* HomeViewController.swift */,
+				A2C7E47624E04BCE00E8CC74 /* Home + DelegatesDatasource.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A253DF1924E13A41005B9160 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A253DF2024E19047005B9160 /* DataLayer */,
+				A253DF1A24E13A63005B9160 /* Bases */,
+				A2C7E46824E0436600E8CC74 /* Binding */,
+				A2C7E46D24E0449500E8CC74 /* extensions */,
+				A2C7E45324E039CB00E8CC74 /* NetworkLayer */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		A253DF1A24E13A63005B9160 /* Bases */ = {
+			isa = PBXGroup;
+			children = (
+				A2C7E44124E0303A00E8CC74 /* BaseViewController.swift */,
+				A2C7E44524E0321500E8CC74 /* BaseNavigation.swift */,
+				A2C7E47024E044F600E8CC74 /* BaseViewModel.swift */,
+				A253DF2124E196A9005B9160 /* BaseCardView.swift */,
+			);
+			path = Bases;
+			sourceTree = "<group>";
+		};
+		A253DF1D24E18BDF005B9160 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				A253DF1E24E18C07005B9160 /* PlayerViewController.swift */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		A253DF2024E19047005B9160 /* DataLayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataLayer;
+			sourceTree = "<group>";
+		};
 		A2C7E40F24E02D9100E8CC74 = {
 			isa = PBXGroup;
 			children = (
 				A25CA79824E050B700F3984C /* Main.storyboard */,
 				A2C7E45124E0349B00E8CC74 /* Localizable.strings */,
+				A253DF1B24E141CA005B9160 /* default.jpg */,
 				A2C7E41A24E02D9100E8CC74 /* MusicPlayer */,
 				A2C7E43124E02D9400E8CC74 /* MusicPlayerUITests */,
 				A2C7E41924E02D9100E8CC74 /* Products */,
@@ -155,13 +248,9 @@
 		A2C7E41A24E02D9100E8CC74 /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				A2C7E46D24E0449500E8CC74 /* extensions */,
-				A2C7E46824E0436600E8CC74 /* Binding */,
-				A2C7E46524E0431200E8CC74 /* ViewModel */,
-				A2C7E46424E042E400E8CC74 /* Controllers */,
-				A2C7E45F24E0410E00E8CC74 /* View */,
+				A253DF1924E13A41005B9160 /* Common */,
+				A253DF1424E139BB005B9160 /* Module */,
 				A2C7E45A24E03C9D00E8CC74 /* Model */,
-				A2C7E45324E039CB00E8CC74 /* NetworkLayer */,
 				A2C7E41B24E02D9100E8CC74 /* AppDelegate.swift */,
 				A2C7E42424E02D9300E8CC74 /* Assets.xcassets */,
 				A2C7E42624E02D9300E8CC74 /* LaunchScreen.storyboard */,
@@ -198,41 +287,11 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A2C7E45F24E0410E00E8CC74 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				A2C7E46024E0414100E8CC74 /* ITunesTrackCollectionViewCell.swift */,
-				A2C7E46124E0414100E8CC74 /* ITunesTrackCollectionViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		A2C7E46424E042E400E8CC74 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				A2C7E47524E04BAF00E8CC74 /* Home */,
-				A2C7E47424E04BA100E8CC74 /* Favorite */,
-				A2C7E47324E04B9300E8CC74 /* Menu */,
-				A2C7E47224E04B7B00E8CC74 /* Base */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		A2C7E46524E0431200E8CC74 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				A2C7E46624E0433300E8CC74 /* TracksViewModel.swift */,
-				A2C7E46B24E043B300E8CC74 /* State.swift */,
-				A2C7E47024E044F600E8CC74 /* BaseViewModel.swift */,
-				A25CA79A24E05B1800F3984C /* TrackCellViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		A2C7E46824E0436600E8CC74 /* Binding */ = {
 			isa = PBXGroup;
 			children = (
 				A2C7E46924E043A100E8CC74 /* Observable.swift */,
+				A2C7E46B24E043B300E8CC74 /* State.swift */,
 			);
 			path = Binding;
 			sourceTree = "<group>";
@@ -243,15 +302,6 @@
 				A2C7E46E24E044B500E8CC74 /* VC + Indicatior.swift */,
 			);
 			path = extensions;
-			sourceTree = "<group>";
-		};
-		A2C7E47224E04B7B00E8CC74 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				A2C7E44124E0303A00E8CC74 /* BaseViewController.swift */,
-				A2C7E44524E0321500E8CC74 /* BaseNavigation.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		A2C7E47324E04B9300E8CC74 /* Menu */ = {
@@ -270,15 +320,6 @@
 				A2C7E44824E032ED00E8CC74 /* FavoriteViewController.xib */,
 			);
 			path = Favorite;
-			sourceTree = "<group>";
-		};
-		A2C7E47524E04BAF00E8CC74 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				A2C7E43D24E02EEF00E8CC74 /* HomeViewController.swift */,
-				A2C7E47624E04BCE00E8CC74 /* Home + DelegatesDatasource.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +410,7 @@
 			files = (
 				A2C7E44F24E0349B00E8CC74 /* Localizable.strings in Resources */,
 				A2C7E42824E02D9300E8CC74 /* LaunchScreen.storyboard in Resources */,
+				A253DF1C24E141CA005B9160 /* default.jpg in Resources */,
 				A2C7E46324E0414100E8CC74 /* ITunesTrackCollectionViewCell.xib in Resources */,
 				A25CA79924E050B700F3984C /* Main.storyboard in Resources */,
 				A2C7E42524E02D9300E8CC74 /* Assets.xcassets in Resources */,
@@ -478,6 +520,7 @@
 				A2C7E44624E0321500E8CC74 /* BaseNavigation.swift in Sources */,
 				A2C7E44024E02F5D00E8CC74 /* SideMenuViewController.swift in Sources */,
 				A2C7E41C24E02D9100E8CC74 /* AppDelegate.swift in Sources */,
+				A253DF2224E196A9005B9160 /* BaseCardView.swift in Sources */,
 				A2C7E46224E0414100E8CC74 /* ITunesTrackCollectionViewCell.swift in Sources */,
 				A25CA79B24E05B1800F3984C /* TrackCellViewModel.swift in Sources */,
 				A2C7E47724E04BCE00E8CC74 /* Home + DelegatesDatasource.swift in Sources */,
@@ -488,6 +531,7 @@
 				A2C7E45924E03BF100E8CC74 /* ITunesRepoProtocol.swift in Sources */,
 				A2C7E47124E044F600E8CC74 /* BaseViewModel.swift in Sources */,
 				A2C7E46C24E043B300E8CC74 /* State.swift in Sources */,
+				A253DF1F24E18C07005B9160 /* PlayerViewController.swift in Sources */,
 				A2C7E43E24E02EEF00E8CC74 /* HomeViewController.swift in Sources */,
 				A2C7E45C24E03CAB00E8CC74 /* Musics.swift in Sources */,
 				A2C7E45E24E0406B00E8CC74 /* ITunesRepo.swift in Sources */,

@@ -23,6 +23,7 @@ class NewtorkManger:Networkable {
                     switch  result {
                 case .success(let response) :
                     do {
+                        print(response.data)
                         let resultApi = try JSONDecoder().decode(T.self, from: response.data)
                         complitionHandler(resultApi,nil)
                         

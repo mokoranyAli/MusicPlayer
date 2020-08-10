@@ -1,30 +1,40 @@
 PODS:
   - Alamofire (5.2.2)
+  - Kingfisher (5.14.1):
+    - Kingfisher/Core (= 5.14.1)
+  - Kingfisher/Core (5.14.1)
   - Localize-Swift (3.1.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - SideMenuSwift (2.0.5)
+  - SwiftAudioPlayer (2.9.0)
 
 DEPENDENCIES:
+  - Kingfisher (~> 5.0)
   - Localize-Swift
   - Moya
   - SideMenuSwift
+  - SwiftAudioPlayer
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Kingfisher
     - Localize-Swift
     - Moya
     - SideMenuSwift
+    - SwiftAudioPlayer
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   Localize-Swift: 4bed4f0ccac8be2ec3517ee359da80ba2adb0fae
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   SideMenuSwift: c7d99c270e0fad922a14b81f1dcc7a84c764bcd5
+  SwiftAudioPlayer: efeaa7d775f5b789c1efb7546346a028d334f588
 
-PODFILE CHECKSUM: a8ff224208616a863448365e57eca03011791fef
+PODFILE CHECKSUM: 9c27eefcf55fbd34130b787d906ef35af1a9a445
 
 COCOAPODS: 1.9.0

@@ -11,10 +11,7 @@ import Foundation
 class BaseViewModel  {
     var apiProtocol: ITunesRepoProtocol?
     var observState: Observable<State?>?
-    var numberOfCells : Int {
-        return 0
-    }
-  
+   
     init(_ apiManager : ITunesRepoProtocol = ITunesRepo()){
            self.apiProtocol = apiManager
            self.observState = Observable<State?>(.empty)

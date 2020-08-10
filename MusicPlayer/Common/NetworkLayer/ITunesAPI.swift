@@ -59,14 +59,14 @@ extension ITunesAPI :TargetType {
     }
     
     
-    var parameters:[String:Any] {
-        switch self {
-            
-        case .searchEverything(let query) :
-            return ["term":query]
-            
-        }
-    }
+//    var parameters:[String:Any] {
+//        switch self {
+//
+//        case .searchEverything(let query) :
+//            return ["term":query]
+//
+//        }
+    //}
     
     
     var task: Task {

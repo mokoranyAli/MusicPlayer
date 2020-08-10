@@ -13,4 +13,6 @@ target 'MusicPlayer' do
   pod 'SideMenuSwift'
   pod 'Localize-Swift'
   pod 'Moya'
+pod 'Kingfisher', '~> 5.0'
+pod 'SwiftAudioPlayer'
 end
