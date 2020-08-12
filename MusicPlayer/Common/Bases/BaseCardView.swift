@@ -60,6 +60,7 @@ import UIKit
           set {
             
               self.layer.shadowRadius = CGFloat(newValue)
+              self.layer.shadowOffset = CGSize(width: 3, height: 3)
           }
       }
     

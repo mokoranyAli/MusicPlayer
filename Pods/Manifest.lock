@@ -8,6 +8,11 @@ PODS:
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
+  - Realm (5.3.3):
+    - Realm/Headers (= 5.3.3)
+  - Realm/Headers (5.3.3)
+  - RealmSwift (5.3.3):
+    - Realm (= 5.3.3)
   - SideMenuSwift (2.0.5)
   - SwiftAudioPlayer (2.9.0)
 
@@ -15,6 +20,7 @@ DEPENDENCIES:
   - Kingfisher (~> 5.0)
   - Localize-Swift
   - Moya
+  - RealmSwift
   - SideMenuSwift
   - SwiftAudioPlayer
 
@@ -24,6 +30,8 @@ SPEC REPOS:
     - Kingfisher
     - Localize-Swift
     - Moya
+    - Realm
+    - RealmSwift
     - SideMenuSwift
     - SwiftAudioPlayer
 
@@ -32,9 +40,11 @@ SPEC CHECKSUMS:
   Kingfisher: 8050bc6f7f68cbf3908bd04df7ccbac188f6d6d6
   Localize-Swift: 4bed4f0ccac8be2ec3517ee359da80ba2adb0fae
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  Realm: 2d57ea355bf8ca2a0964d6bfb38d28d7ff2addf6
+  RealmSwift: 0a709536ecea30eea1d3c514f6ade2ed078dee3c
   SideMenuSwift: c7d99c270e0fad922a14b81f1dcc7a84c764bcd5
   SwiftAudioPlayer: efeaa7d775f5b789c1efb7546346a028d334f588
 
-PODFILE CHECKSUM: 9c27eefcf55fbd34130b787d906ef35af1a9a445
+PODFILE CHECKSUM: 8836117d81dc24d9779ac2d32274f23e2cf86d98
 
 COCOAPODS: 1.9.0

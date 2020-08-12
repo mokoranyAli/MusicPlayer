@@ -11,15 +11,20 @@ import Foundation
 
 struct TrackCellViewModel {
     let trackName:String
-    let duration:String
+    var duration:String
     let imageURL:URL
     var isFavorite:Bool = false
     
     init(track:Result) {
         trackName = track.trackName ?? "NO NAME"
-    
-        let duraionObject = (track.trackTimeMillis?.secondsToHoursMinutesSeconds())!
-        duration = "\(duraionObject.0):\(duraionObject.1):\(duraionObject.2)"
+    duration = "A"
+        // FIXME:- GUARD LET
+        if  let duraionObject = (track.trackTimeMillis?.secondsToMinutesSeconds()) {
+            duration = String(duraionObject)
+//            print(track.trackTimeMillis!)
+//            print(<#T##items: Any...##Any#>)
+        }
+        
        
         guard  let url = URL(string: track.artworkUrl60 ?? "") else {
             self.imageURL = URL(string: "www.google.com")!
@@ -28,10 +33,15 @@ struct TrackCellViewModel {
         
         imageURL = url
     }
+    
+    init(track:Result , isFavotite:Bool) {
+        self.init(track: track)
+        self.isFavorite = isFavotite
+    }
 }
 
 extension Int {
-func secondsToHoursMinutesSeconds () -> (Int, Int, Int) {
-  return (self / 3600, (self % 3600) / 60, (self % 3600) % 60)
+func secondsToMinutesSeconds () -> Double {
+    return Double(self/1000/60)
 }
 }

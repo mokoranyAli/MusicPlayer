@@ -16,10 +16,14 @@ extension HomeViewController : UICollectionViewDelegate , UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ITunesTrackCollectionViewCell.cellID)", for: indexPath ) as! ITunesTrackCollectionViewCell
-        cell.indexPath = indexPath
-        cell.playButtonDelegate = self
         let cellVM = viewModel.getCellViewModel(at: indexPath)
-        cell.trackCellViewModel = cellVM
+               cell.trackCellViewModel = cellVM
+        
+        cell.playButtonDelegate = self
+        cell.favoriteDelegate = self
+        cell.shareButtonDelegate = self
+        cell.indexPath = indexPath
+       
         return cell
     }
 
@@ -28,22 +32,13 @@ extension HomeViewController : UICollectionViewDelegate , UICollectionViewDataSo
  {
      let width = (tracksCollectionView.frame.width) / 2
      let height = tracksCollectionView.frame.height/3
-     print("layout collectionViewLayout")
+//     print("layout collectionViewLayout")
      return CGSize(width: width, height: height)
  }
 
     
-}
-
-
-extension HomeViewController : playButtonClickable {
-    func didClickedOnSourceLabel(at cell: ITunesTrackCollectionViewCell) {
-//        let track =   viewModel.getTrack(for: cell.indexPath!.item)
-//        print(track?.trackName)\
-        if let index = cell.indexPath?.item {
-            viewModel.didSelectedTrackToPlay(index: index)
-        }
-    }
     
     
 }
+
+

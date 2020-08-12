@@ -68,21 +68,22 @@ class SideMenuViewController: BaseViewController {
             case .favorite:
                 let favoriteVC = FavoriteViewController()
                 navigate(to: favoriteVC)
-                
+            case .home :
+                let homeVC = storyboard?.instantiateViewController(identifier: "\(TestViewController.self)") as! TestViewController
+                 
+                navigate(to: homeVC)
+                //self.navigationController?.popViewController(animated: true)
             default:
                 break
             }
-            
         }
-        
     }
-
     // MARK: - Navigation Helpers
     //
     extension SideMenuViewController {
-      
       func navigate(to viewController: UIViewController) {
         sideMenuController?.hideMenu()
+        
         navigationBase?.pushViewController(viewController, animated: true)
       }
       

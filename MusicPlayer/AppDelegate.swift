@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               window = UIWindow(frame: UIScreen.main.bounds)
     //          window = UIWindow(windowScene: windowScene)
                         
+        
             let contentViewController = mainStoryboard.instantiateViewController(identifier: "ContentNavigation")
             
             let menuViewController = mainStoryboard.instantiateViewController(identifier: "MenuNavigation") as! SideMenuViewController

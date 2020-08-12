@@ -7,11 +7,16 @@
 //
 
 import Foundation
+
 class TracksViewModel:BaseViewModel {
+    
+    let favoriteViewModel = FavoriteViewModel()
     
     //MARK: - properties
     var tracks = Observable<[Result]?> (nil)
     var selectedTrack = Observable<Result?>(nil)
+    var playList = Observable<([Result] , Int)?>(nil)
+    var selectedTrackToShare = Observable<Result?>(nil)
     var numberOfCells: Int {
         return cellViewModel.count
     }
@@ -49,7 +54,8 @@ class TracksViewModel:BaseViewModel {
     private func createCellsViewModels(items tracks:[Result]){
         cellViewModel.removeAll()
         for track in tracks {
-            self.cellViewModel.append(TrackCellViewModel(track: track))
+            let trackChecker = checkTrackIsExist(track: track)
+            self.cellViewModel.append(TrackCellViewModel(track: track, isFavotite: trackChecker))
         }
     }
     
@@ -64,5 +70,44 @@ class TracksViewModel:BaseViewModel {
     
     func didSelectedTrackToPlay(index:Int) {
         selectedTrack.value = tracks.value?[index]
+        playList.value = (tracks.value , index) as! ([Result], Int)
     }
+    
+    func reloadCellViewModel(){
+           if let track = tracks.value {
+               createCellsViewModels(items: track)
+           }
+       }
+    
+    private func checkTrackIsExist(track:Result) -> Bool {
+          return favoriteViewModel.checkIsTrackExist(track: track)
+      }
+
+      
+      
+      func toggleFavortie(for track : Result) {
+          favoriteViewModel.toggleTrackFromFavourite(trackObject: track)
+          reloadCellViewModel()
+      }
+      
+      
+      func getTrack(form indexPath: IndexPath) -> Result? {
+          return tracks.value?[indexPath.row]
+      }
+    
+    func shareItemOnIndexPath(index:Int) {
+        guard let track = tracks.value?[index] else {return}
+        self.selectedTrackToShare.value = track
+        
+    }
+    
+//    func getImageOfUrl(url:String) ->UIImage {
+//        guard let url = URL(string: url) else {
+//            return UIImage(named: "default")!
+//        }
+//        KingfisherManager.shared.retrieveImage(with: url, options: nil, progressBlock: nil, completionHandler: { image, error, cacheType, imageURL in
+//            return image
+//        })
+//        
+//    }
 }
