@@ -19,7 +19,7 @@ extension UIViewController {
         activityIndicator.hidesWhenStopped = true
         
         
-        activityIndicator.style = .large
+       // activityIndicator.style = .large
         activityIndicator.startAnimating()
       
 

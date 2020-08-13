@@ -10,6 +10,7 @@ import UIKit
 
 import LNPopupController
 import MediaPlayer
+
 import Kingfisher
 
 class PlayerViewController: UIViewController {
@@ -18,6 +19,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var playBtn: UIButton!
@@ -46,7 +48,7 @@ class PlayerViewController: UIViewController {
     
     func toggleChangeSong(state:ToggleChangeSongEnum){
         switch state {
-        
+            
         case .next:
             currentTrackIndex! += 1
         case .pervious:
@@ -90,7 +92,7 @@ class PlayerViewController: UIViewController {
     
     func configure() {
         
-         pause = UIBarButtonItem(image: LNSystemImage(named: "pause.fill"), style: .plain, target: self, action: #selector(pauseBtnDidTapped(tapGestureRecognizer:)))
+        pause = UIBarButtonItem(image: LNSystemImage(named: "pause.fill"), style: .plain, target: self, action: #selector(pauseBtnDidTapped(tapGestureRecognizer:)))
         
         pause?.accessibilityLabel = NSLocalizedString("Pause", comment: "")
         let next = UIBarButtonItem(image: LNSystemImage(named: "forward.fill"), style: .plain, target: self, action: nil)
@@ -116,7 +118,7 @@ class PlayerViewController: UIViewController {
             pause?.image = LNSystemImage(named: "pause.fill")
             isPlaying = true
         }
-       
+        
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -165,35 +167,48 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+          self.songNameLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: self.songNameLabel.leadingAnchor, multiplier: -self.songNameLabel.frame.width).isActive = true
         
-        
-        if #available(iOS 13.0, *) {
-            //                albumArtImageView.layer.cornerCurve = .continuous
-        }
-        //            albumArtImageView.layer.cornerRadius = 16
+
         showActivityIndicator()
-        playAudio(perviewUrl: (currentTrack?.previewUrl)!)
+        setupAudioSession()
         if let currentTrack = currentTrack {
+             playAudio(perviewUrl: (currentTrack.previewUrl)!)
             setupCurrentTrackOnUI(currentTrack: currentTrack)
+            setupNotificationView()
+            setupMediaPlayerNotificationView()
+            
         }
         
-        // Do any additional setup after loading the view.
-        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(PlayerViewController._timerTicked(_:)), userInfo: nil, repeats: true)
-        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(PlayerViewController._timerTicked(_:)), userInfo: nil, repeats: true)
+//        // Do any additional setup after loading the view.
+//        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(PlayerViewController._timerTicked(_:)), userInfo: nil, repeats: true)
+//        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(PlayerViewController._timerTicked(_:)), userInfo: nil, repeats: true)
     }
     
     
     func playAudio(perviewUrl:String) {
-        
-        
         guard let url = URL.init(string: perviewUrl) else { return }
         let playerItem = AVPlayerItem.init(url: url)
         player = AVPlayer.init(playerItem: playerItem)
         player?.play()
         isPlaying = true
         hideActivityIndicator()
+        
+         UIApplication.shared.beginReceivingRemoteControlEvents()
+        setupNotificationView()
+        setupMediaPlayerNotificationView()
     }
     
+    func setupAudioSession() {
+        do {
+//            try AVAudioSession.sharedInstance().setCategory(.soloAmbient, mode: .default, options: .allowAirPlay)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+           
+        } catch {
+            print("Error setting the AVAudioSession:", error.localizedDescription)
+        }
+    }
     
     func stopAudio() {
         player?.pause()
@@ -208,26 +223,102 @@ class PlayerViewController: UIViewController {
         let resource = ImageResource(downloadURL: imageUrl)
         playerImageView.kf.indicatorType = .activity
         playerImageView.kf.setImage(with: resource,placeholder: UIImage(named: "defalut.jpg"))
+       // backgroundImage.kf.setImage(with: resource,placeholder: UIImage(named: "defalut.jpg"))
+        
+        KingfisherManager.shared.retrieveImage(with: imageUrl, options: nil, progressBlock: nil, completionHandler: { image, error, cacheType, imageURL in
+            self.backgroundImage.image = image
+            self.setBluredBackground()
+        })
+        
+        
+        UIView.transition(with:self.songNameLabel,
+        duration: 3.0,
+        options: [.autoreverse,.repeat],
+        animations: {
+
+           
+            self.songNameLabel.transform = CGAffineTransform(translationX: ((self.view.frame.size.width) ), y:0)
+
+        },
+        completion: nil)
+   
+       
+        
     }
     
     
-    @objc func _timerTicked(_ timer: Timer) {
-        popupItem.progress += 0.0010;
-        popupItem.accessibilityProgressLabel = NSLocalizedString("Playback Progress", comment: "")
+    
+    func setupMediaPlayerNotificationView() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter.nextTrackCommand.isEnabled = true
+        commandCenter.previousTrackCommand.isEnabled = true
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.isEnabled = true
         
-        let totalTime = TimeInterval(3000)
-        popupItem.accessibilityProgressValue = "\(accessibilityDateComponentsFormatter.string(from: TimeInterval(popupItem.progress) * totalTime)!) \(NSLocalizedString("of", comment: "")) \(accessibilityDateComponentsFormatter.string(from: totalTime)!)"
+        //add handler for play command
+        commandCenter.playCommand.addTarget { [unowned self] event  in
+            self.player?.play()
+            return.success
+        }
         
-                    progressView.progress = popupItem.progress
+        // add handler for pause command
+        commandCenter.pauseCommand.addTarget { [unowned self] event  in
+            (self.player?.pause())!
+            return .success
+        }
         
-        if popupItem.progress >= 1.0 {
-            timer.invalidate()
-//            toggleChangeSong(state: .next)
-//            popupPresentationContainer?.dismissPopupBar(animated: true, completion: nil)
+        //add handler for previous
+        commandCenter.previousTrackCommand.addTarget { [unowned self] event   in
+            self.toggleChangeSong(state: .pervious)
+            return .success
+        }
+        
+        
+        // add handler for next
+        commandCenter.nextTrackCommand.addTarget { [unowned self] event   in
+            self.toggleChangeSong(state: .next)
+            return .success
         }
     }
-}
+    
+    
+    
+    func setupNotificationView() {
+        let duration = 30
+         var nowPlayingInfo = [String : Any]()
+        nowPlayingInfo[MPMediaItemPropertyTitle] = "song"
+        nowPlayingInfo[MPMediaItemPropertyArtist] = "artist"
+       nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = duration
+        nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: UIImage(named: "default")!.size, requestHandler: { (size) -> UIImage in
+            return UIImage(named: "default")!
+        })
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+    
+    
+    
+    func setBluredBackground() {
+     let inputImage = CIImage(cgImage: (self.backgroundImage.image?.cgImage)!)
+        let filter = CIFilter(name: "CIGaussianBlur")
+        filter?.setValue(inputImage, forKey: "inputImage")
+        filter?.setValue(10, forKey: "inputRadius")
+        let blurred = filter?.outputImage
 
+        var newImageSize: CGRect = (blurred?.extent)!
+        newImageSize.origin.x += (newImageSize.size.width - (self.backgroundImage.image?.size.width)!) / 2
+        newImageSize.origin.y += (newImageSize.size.height - (self.backgroundImage.image?.size.height)!) / 2
+        newImageSize.size = (self.backgroundImage.image?.size)!
+
+        let resultImage: CIImage = filter?.value(forKey: "outputImage") as! CIImage
+        let context: CIContext = CIContext.init(options: nil)
+        let cgimg: CGImage = context.createCGImage(resultImage, from: newImageSize)!
+        let blurredImage: UIImage = UIImage.init(cgImage: cgimg)
+        self.backgroundImage.image = blurredImage
+    }
+    
+    
+
+}
 enum ToggleChangeSongEnum {
     case next
     case pervious

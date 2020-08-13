@@ -69,10 +69,15 @@ class SideMenuViewController: BaseViewController {
                 let favoriteVC = FavoriteViewController()
                 navigate(to: favoriteVC)
             case .home :
-                let homeVC = storyboard?.instantiateViewController(identifier: "\(TestViewController.self)") as! TestViewController
+                if #available(iOS 13.0, *) {
+                    let homeVC = storyboard?.instantiateViewController(identifier: "\(TestViewController.self)") as! TestViewController
+                    navigate(to: homeVC)
+                                 //self.navigationController?.popViewController(animated: true)
+                } else {
+                    // Fallback on earlier versions
+                }
                  
-                navigate(to: homeVC)
-                //self.navigationController?.popViewController(animated: true)
+             
             default:
                 break
             }

@@ -13,6 +13,7 @@
 		A2520FCA24E41A370041BC67 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2520FC824E41A370041BC67 /* PlayerViewController.xib */; };
 		A2520FCC24E41B110041BC67 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2520FCB24E41B110041BC67 /* LNPopupController.framework */; };
 		A2520FCD24E41B110041BC67 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2520FCB24E41B110041BC67 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A2520FD324E548CA0041BC67 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2520FD224E548CA0041BC67 /* AudioToolbox.framework */; };
 		A253DF1C24E141CA005B9160 /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A253DF1B24E141CA005B9160 /* default.jpg */; };
 		A253DF2224E196A9005B9160 /* BaseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A253DF2124E196A9005B9160 /* BaseCardView.swift */; };
 		A255160824E2C03E00E213B0 /* FavoriteVC + Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A255160724E2C03E00E213B0 /* FavoriteVC + Delegates.swift */; };
@@ -90,6 +91,8 @@
 		A2520FC724E41A370041BC67 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		A2520FC824E41A370041BC67 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		A2520FCB24E41B110041BC67 /* LNPopupController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LNPopupController.framework; path = Carthage/Build/iOS/LNPopupController.framework; sourceTree = "<group>"; };
+		A2520FD124E548CA0041BC67 /* MusicPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicPlayer.entitlements; sourceTree = "<group>"; };
+		A2520FD224E548CA0041BC67 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A253DF1B24E141CA005B9160 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		A253DF2124E196A9005B9160 /* BaseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCardView.swift; sourceTree = "<group>"; };
 		A255160724E2C03E00E213B0 /* FavoriteVC + Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteVC + Delegates.swift"; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 			files = (
 				98C676C826E00C8A20B43218 /* Pods_MusicPlayer.framework in Frameworks */,
 				A2520FCC24E41B110041BC67 /* LNPopupController.framework in Frameworks */,
+				A2520FD324E548CA0041BC67 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +184,7 @@
 		6D6718213A9E004B90113078 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2520FD224E548CA0041BC67 /* AudioToolbox.framework */,
 				A2520FCB24E41B110041BC67 /* LNPopupController.framework */,
 				B3E8AEC8581EB1205CE1046A /* Pods_MusicPlayer.framework */,
 				2D747B4E7E2EEF9411BD388D /* Pods_MusicPlayer_MusicPlayerUITests.framework */,
@@ -362,6 +367,7 @@
 		A2C7E41A24E02D9100E8CC74 /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				A2520FD124E548CA0041BC67 /* MusicPlayer.entitlements */,
 				A253DF1924E13A41005B9160 /* Common */,
 				A253DF1424E139BB005B9160 /* Module */,
 				A2C7E45A24E03C9D00E8CC74 /* Model */,
@@ -784,7 +790,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -839,7 +845,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -854,7 +860,9 @@
 			baseConfigurationReference = 35CE4C91B33971D33B3641B9 /* Pods-MusicPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MusicPlayer/MusicPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 65BYK5SR4J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -876,7 +884,9 @@
 			baseConfigurationReference = AAE81BD633314616FD1748DF /* Pods-MusicPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MusicPlayer/MusicPlayer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 65BYK5SR4J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
