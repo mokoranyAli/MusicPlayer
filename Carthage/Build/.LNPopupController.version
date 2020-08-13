@@ -1,0 +1,9 @@
+{
+  "commitish" : "2.9.5",
+  "iOS" : [
+    {
+      "name" : "LNPopupController",
+      "hash" : "37d7c4dcb85ede3f7bce681c922550739e017de2fbdde1478a5d47dda03fd47a"
+    }
+  ]
+}

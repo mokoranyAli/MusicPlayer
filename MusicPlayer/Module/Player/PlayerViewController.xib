@@ -13,6 +13,7 @@
                 <outlet property="backgroundImage" destination="Jyw-eZ-zVb" id="Rsd-Sb-Mp8"/>
                 <outlet property="playBtn" destination="qqK-rC-u93" id="AVK-44-Ser"/>
                 <outlet property="playerImageView" destination="kQA-8p-FTZ" id="LBP-B4-QSx"/>
+                <outlet property="progressViewSlider" destination="M24-Ry-oM0" id="Kmy-ag-DjQ"/>
                 <outlet property="songNameLabel" destination="kNc-uc-fFB" id="f5X-TC-JKC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -96,6 +97,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="yri-9t-k0Y"/>
                     </constraints>
+                    <connections>
+                        <action selector="didValueChanged:" destination="-1" eventType="valueChanged" id="vn5-Y9-bQ8"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftP-BN-03V">
                     <rect key="frame" x="16" y="643" width="75" height="20.5"/>
