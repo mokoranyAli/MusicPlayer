@@ -23,7 +23,6 @@ class FavoriteViewController: BaseViewController {
 
 
     func setupCollectionView() {
-        
         let cell = UINib(nibName: "\(ITunesTrackCollectionViewCell.cellID)", bundle: nil)
         favoriteCollectionView.register(cell, forCellWithReuseIdentifier: "\(ITunesTrackCollectionViewCell.cellID)")
         favoriteCollectionView.dataSource = self

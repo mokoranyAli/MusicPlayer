@@ -21,7 +21,7 @@ class TracksViewModel:BaseViewModel {
         return cellViewModel.count
     }
     
-    private var cellViewModel = [TrackCellViewModel]() {
+    private var cellViewModel = [TrackCellViewModel](){
         didSet{
             observState?.value = .reloading
         }
@@ -100,14 +100,5 @@ class TracksViewModel:BaseViewModel {
         self.selectedTrackToShare.value = track
         
     }
-    
-//    func getImageOfUrl(url:String) ->UIImage {
-//        guard let url = URL(string: url) else {
-//            return UIImage(named: "default")!
-//        }
-//        KingfisherManager.shared.retrieveImage(with: url, options: nil, progressBlock: nil, completionHandler: { image, error, cacheType, imageURL in
-//            return image
-//        })
-//        
-//    }
+
 }

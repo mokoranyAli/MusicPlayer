@@ -28,8 +28,6 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Home VC")
-        
-        
         setupTrackDidSelectedToPlay()
         setupLayoutForCollectionView()
         setupCollectionView()
@@ -49,6 +47,10 @@ class HomeViewController: BaseViewController {
         //setupLayoutForCollectionView()
         tracksCollectionView.reloadData()
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        viewModel.reloadCellViewModel()
+//    }
     
     //MARK: -setupSearchController
     func setupSearchController() {

@@ -11,10 +11,13 @@
             <connections>
                 <outlet property="artistNameLabel" destination="Lxl-3Z-cgY" id="6Ge-Wn-1ca"/>
                 <outlet property="backgroundImage" destination="Jyw-eZ-zVb" id="Rsd-Sb-Mp8"/>
+                <outlet property="favoriteBtn" destination="DJh-rD-Kjp" id="Toq-L8-zAO"/>
                 <outlet property="playBtn" destination="qqK-rC-u93" id="AVK-44-Ser"/>
                 <outlet property="playerImageView" destination="kQA-8p-FTZ" id="LBP-B4-QSx"/>
                 <outlet property="progressViewSlider" destination="M24-Ry-oM0" id="Kmy-ag-DjQ"/>
                 <outlet property="songNameLabel" destination="kNc-uc-fFB" id="f5X-TC-JKC"/>
+                <outlet property="timeNextLabel" destination="aHu-NQ-N0g" id="OUE-xk-sHs"/>
+                <outlet property="timePreviousLabel" destination="ftP-BN-03V" id="hdF-J2-eTJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -51,8 +54,8 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqK-rC-u93">
-                            <rect key="frame" x="227" y="0.0" width="111.5" height="75"/>
-                            <state key="normal" image="outline_play_arrow_white_36pt_3x">
+                            <rect key="frame" x="227" y="1.5" width="111.5" height="72"/>
+                            <state key="normal" image="playing">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -97,9 +100,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="yri-9t-k0Y"/>
                     </constraints>
-                    <connections>
-                        <action selector="didValueChanged:" destination="-1" eventType="valueChanged" id="vn5-Y9-bQ8"/>
-                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftP-BN-03V">
                     <rect key="frame" x="16" y="643" width="75" height="20.5"/>
@@ -158,9 +158,9 @@
     <resources>
         <image name="fill-heart.png" width="312.40676879882812" height="312.40676879882812"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="outline_play_arrow_white_36pt_3x" width="108" height="108"/>
         <image name="outline_skip_next_white_36pt_3x" width="108" height="108"/>
         <image name="outline_skip_previous_white_36pt_3x" width="108" height="108"/>
+        <image name="playing" width="72" height="72"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
     </resources>
 </document>
