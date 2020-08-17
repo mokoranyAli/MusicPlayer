@@ -12,8 +12,8 @@ extension HomeViewController:TrackRealmDelegate {
     func toggleFavotire(cell: ITunesTrackCollectionViewCell) {
         print("HomeViewController TrackRealmDelegate toggleFavotire")
         guard let index = cell.indexPath?.item else { return }
-        if let trackObj = viewModel.getTrack(for: index){
-            viewModel.toggleFavortie(for: trackObj)
+        if let trackObj = viewModel?.getTrack(for: index){
+            viewModel?.toggleFavortie(for: trackObj)
         }
     }
    
@@ -22,7 +22,7 @@ extension HomeViewController:TrackRealmDelegate {
 extension HomeViewController : PlayButtonClickable {
     func didClickedOnPlayButton(at cell: ITunesTrackCollectionViewCell) {
         if let index = cell.indexPath?.item {
-            viewModel.didSelectedTrackToPlay(index: index)
+            viewModel?.didSelectedTrackToPlay(index: index)
         }
     }
 }
@@ -30,8 +30,22 @@ extension HomeViewController : PlayButtonClickable {
 extension HomeViewController : SharButtonClickable {
     func didClickOnShareButton(at cell: ITunesTrackCollectionViewCell) {
         guard let index = cell.indexPath?.item else { return }
-        viewModel.shareItemOnIndexPath(index:index)
+        viewModel?.shareItemOnIndexPath(index:index)
+    }
+}
+
+extension HomeViewController : PlayerScreenDelegate {
+    func playerScreenWillAppear() {
+       self.tabBarController?.navigationController?.navigationBar.isHidden = true
     }
     
-    
+    func playerScreenDidDisappear(currentPlayingSong:Result) {
+        self.currentSongInPlaying = currentPlayingSong
+        self.tabBarController?.navigationController?.navigationBar.isHidden = false
+        searchController.searchBar.becomeFirstResponder()
+//        searchController.searchBar.updateFocusIfNeeded()
+        viewModel?.reloadCellViewModel()
+        
+         
+    }
 }

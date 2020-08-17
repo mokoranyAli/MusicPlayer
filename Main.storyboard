@@ -110,13 +110,14 @@
             </objects>
             <point key="canvasLocation" x="696" y="737"/>
         </scene>
-        <!--Test View Controller-->
+        <!--Base Tabbar View Controller-->
         <scene sceneID="Bag-7p-Cci">
             <objects>
-                <tabBarController storyboardIdentifier="TestViewController" automaticallyAdjustsScrollViewInsets="NO" id="xP4-PP-IXf" customClass="TestViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="BaseTabbarViewController" automaticallyAdjustsScrollViewInsets="NO" id="xP4-PP-IXf" customClass="BaseTabbarViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iDt-1G-nwj"/>
                     <tabBar key="tabBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rKN-ck-Kdz">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

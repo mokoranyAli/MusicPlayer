@@ -10,7 +10,7 @@ import Foundation
 
 class TracksViewModel:BaseViewModel {
     
-    let favoriteViewModel = FavoriteViewModel()
+    var favoriteViewModel:FavoriteViewModel?
     
     //MARK: - properties
     var tracks = Observable<[Result]?> (nil)
@@ -25,6 +25,11 @@ class TracksViewModel:BaseViewModel {
         didSet{
             observState?.value = .reloading
         }
+    }
+    
+    init(favoriteViewModel:FavoriteViewModel) {
+        super.init()
+        self.favoriteViewModel = favoriteViewModel
     }
     
     /// helper functions
@@ -80,13 +85,13 @@ class TracksViewModel:BaseViewModel {
        }
     
     private func checkTrackIsExist(track:Result) -> Bool {
-          return favoriteViewModel.checkIsTrackExist(track: track)
+          return favoriteViewModel?.checkIsTrackExist(track: track) ?? false
       }
 
       
       
       func toggleFavortie(for track : Result) {
-          favoriteViewModel.toggleTrackFromFavourite(trackObject: track)
+          favoriteViewModel?.toggleTrackFromFavourite(trackObject: track)
           reloadCellViewModel()
       }
       

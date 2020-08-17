@@ -26,8 +26,11 @@ extension TrackDataRepository : TracksRepositoryProtocol {
     
     
     func checkIsTrackExist(track:Result) -> Bool {
-        do { return try dbManager.checkObjectIsExistInDB(TrackRealm.self, key: track.previewUrl!) }
-        catch { print("error ....") }
+        if let url = track.previewUrl {
+            do { return try dbManager.checkObjectIsExistInDB(TrackRealm.self, key: url) }
+                   catch { print("error ....") }
+        }
+       
         return false
     }
     

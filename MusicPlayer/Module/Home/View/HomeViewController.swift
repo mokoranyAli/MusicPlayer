@@ -17,25 +17,23 @@ class HomeViewController: BaseViewController {
     
     //MARK: - properties
     var searchController = UISearchController(searchResultsController: nil)
-    public lazy var viewModel  = {
-        return TracksViewModel()
-    }()
-    
-    
-    
+    var viewModel:TracksViewModel?
+    var popupContentController:PlayerViewController?
+    var currentSongInPlaying:Result?
+    var trackImage:UIImage?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(searchController)
         print("Home VC")
         setupTrackDidSelectedToPlay()
         setupLayoutForCollectionView()
         setupCollectionView()
-        setubObservers(viewModel: viewModel)
+        setubObservers(viewModel: viewModel!)
         setupSearchController()
         setupSelectedTrackToShare()
-        
-        viewModel.initFetchVM(query: "adele")
+        viewModel?.initFetchVM(query: "adele")
     }
     
     
@@ -48,9 +46,7 @@ class HomeViewController: BaseViewController {
         tracksCollectionView.reloadData()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        viewModel.reloadCellViewModel()
-//    }
+    
     
     //MARK: -setupSearchController
     func setupSearchController() {
@@ -63,7 +59,7 @@ class HomeViewController: BaseViewController {
         //searchController.dimsBackgroundDuringPresentation = true
         
         
-       self.tabBarController?.navigationItem.hidesSearchBarWhenScrolling = false
+        self.tabBarController?.navigationItem.hidesSearchBarWhenScrolling = true
         self.tabBarController?.navigationController?.navigationBar.isTranslucent = true
         // Make sure the that the search bar is visible within the navigation bar.
         searchController.searchBar.sizeToFit()
@@ -82,13 +78,8 @@ class HomeViewController: BaseViewController {
     
     //MARK: -setup did select track
     private func setupTrackDidSelectedToPlay() {
-//        viewModel.selectedTrack.subscribe({[unowned self] (selectedTrack) in
-//            if let track = selectedTrack {
-////                self.showPlayerScreen(track: track)
-//            }
-//        })
-//
-        viewModel.playList.subscribe({[unowned self] (playListWithCurrentIndex) in
+      
+        viewModel?.playList.subscribe({[unowned self] (playListWithCurrentIndex) in
             if let plistWithCurrent = playListWithCurrentIndex {
                 self.showPlayerScreen(playlist: plistWithCurrent.0, currentTrackIndex: plistWithCurrent.1)
             }
@@ -98,7 +89,7 @@ class HomeViewController: BaseViewController {
     
     //MARK: -setupDidSelectedTrackToShare
     private func setupSelectedTrackToShare(){
-        viewModel.selectedTrackToShare.subscribe({[unowned self] (selectedTrackToShare) in
+        viewModel?.selectedTrackToShare.subscribe({[unowned self] (selectedTrackToShare) in
             if let track = selectedTrackToShare {
                 self.shareTrack(track: track)
             }
@@ -131,19 +122,48 @@ class HomeViewController: BaseViewController {
     
     //MARK: - ShowPlayerScreen
     func showPlayerScreen(playlist:[Result] , currentTrackIndex:Int) {
-
         
-        let popupContentController = PlayerViewController(nibName: "\(PlayerViewController.self)", bundle: nil) as PlayerViewController
-        popupContentController.playList = playlist
-        popupContentController.currentTrackIndex = currentTrackIndex
-        self.tabBarController?.popupBar.barStyle = .compact
-        popupContentController.songTitle = playlist[currentTrackIndex].trackName!
-        popupContentController.albumTitle = playlist[currentTrackIndex].artistName!
+        if let currentTrack = currentSongInPlaying {
+            if currentTrack.trackName == playlist[currentTrackIndex].trackName {
+                print("Just Open Player")
+                self.tabBarController?.presentPopupBar(
+                    withContentViewController: popupContentController!,
+                    openPopup: true,
+                    animated: true,
+                    completion: nil
+                )
+            }
+            else {
+                openPlayerAndPlay(playlist: playlist, currentTrackIndex: currentTrackIndex)
+            }
+        }
+        else {
+            openPlayerAndPlay(playlist: playlist, currentTrackIndex: currentTrackIndex)
+        }
         
+        
+    }
+    
+    func openPlayerAndPlay(playlist:[Result] , currentTrackIndex:Int) {
+        popupContentController = PlayerViewController(nibName: "\(PlayerViewController.self)", bundle: nil) as PlayerViewController
+        
+        popupContentController?.playList = nil
+        
+        popupContentController?.playList = playlist
+        popupContentController?.currentTrackIndex = currentTrackIndex
+        self.tabBarController?.popupBar.barStyle = .custom
+        //        self.tabBarController?.popupBar.ba
+        self.tabBarController?.popupBar.backgroundStyle = .dark
+        self.tabBarController?.popupBar.tintColor = .label
+        popupContentController?.songTitle = playlist[currentTrackIndex].trackName!
+        popupContentController?.artistName = playlist[currentTrackIndex].artistName!
+        popupContentController?.albumArt = UIImage(named: "default")!
+      
+        popupContentController?.playerDelegate = self
         
         tabBarController?.popupContentView.popupCloseButton.accessibilityLabel = NSLocalizedString("Dismiss Now Playing Screen", comment: "")
         self.tabBarController?.presentPopupBar(
-            withContentViewController: popupContentController,
+            withContentViewController: popupContentController!,
             openPopup: true,
             animated: true,
             completion: nil
@@ -156,7 +176,6 @@ class HomeViewController: BaseViewController {
         } else {
             self.tabBarController?.popupBar.tintColor = .orange
         }
-
     }
 }
 
@@ -172,7 +191,7 @@ extension HomeViewController: UISearchResultsUpdating ,UISearchBarDelegate {
         if let searchText = searchBar.text {
             if searchText != "" {
                 print(searchText)
-                viewModel.initFetchVM(query: searchText)
+                viewModel?.initFetchVM(query: searchText)
             }
         }
     }
@@ -182,6 +201,7 @@ extension HomeViewController: UISearchResultsUpdating ,UISearchBarDelegate {
         // if you'd like to search character by character
     }
     
-    
-    
 }
+
+
+

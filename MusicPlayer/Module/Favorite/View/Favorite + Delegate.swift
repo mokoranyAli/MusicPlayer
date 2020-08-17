@@ -11,18 +11,18 @@ import UIKit
 extension FavoriteViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if favoritViewModel.numberOfCells == 0 {
+        if favoritViewModel?.numberOfCells == 0 {
             collectionView.setEmptyView(title: "NO FAVORITES", message: "no favorite tracks to show")
         }
         else {
             collectionView.restore()
         }
-        return favoritViewModel.numberOfCells
+        return favoritViewModel?.numberOfCells ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ITunesTrackCollectionViewCell.cellID)", for: indexPath ) as! ITunesTrackCollectionViewCell
-        let cellVM = favoritViewModel.getCellViewModel(at: indexPath)
+        let cellVM = favoritViewModel?.getCellViewModel(at: indexPath)
         cell.trackCellViewModel = cellVM
         cell.playButtonDelegate = self
         cell.favoriteDelegate = self

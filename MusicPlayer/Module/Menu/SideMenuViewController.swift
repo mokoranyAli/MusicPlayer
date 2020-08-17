@@ -66,11 +66,12 @@ class SideMenuViewController: BaseViewController {
             case .changeLanguage:
                 changeLanguage()
             case .favorite:
-                let favoriteVC = FavoriteViewController()
-                navigate(to: favoriteVC)
+                let tabbar = FavoriteRouter.createModule()
+                
+                navigate(to: tabbar)
             case .home :
                 if #available(iOS 13.0, *) {
-                    let homeVC = storyboard?.instantiateViewController(identifier: "\(TestViewController.self)") as! TestViewController
+                    let homeVC = HomeRouter.createModuleWithoutNavigation()
                     navigate(to: homeVC)
                                  //self.navigationController?.popViewController(animated: true)
                 } else {

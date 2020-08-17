@@ -10,7 +10,7 @@ import UIKit
 import Localize_Swift
 import SideMenuSwift
 
-class TestViewController: UITabBarController {
+class BaseTabbarViewController: UITabBarController {
 
     open var setupMenuButton: UIBarButtonItem {
            return UIBarButtonItem(title: "Menu".localized(), style: .plain, target: self, action: #selector(self.menuButtonPressed(_:)))

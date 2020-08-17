@@ -11,13 +11,14 @@ class FavoriteViewModel : BaseViewModel{
     let dbManager: DataManager
     let trackRepo: TracksRepositoryProtocol
     var tracks = Observable<[Result]?> (nil)
-    var selectedIndex = Observable<Result?>(nil)
+    var selectedTrack = Observable<Result?>(nil)
+    var playList = Observable<([Result] , Int)?>(nil)
     private var cellViewModel = [TrackCellViewModel]() {
-           didSet{
-               observState?.value = .reloading
-           }
-       }
-     var numberOfCells : Int {
+        didSet{
+            observState?.value = .reloading
+        }
+    }
+    var numberOfCells : Int {
         return cellViewModel.count
     }
     
@@ -29,12 +30,12 @@ class FavoriteViewModel : BaseViewModel{
     
     func toggleTrackFromFavourite(trackObject : Result) {
         
-       if checkIsTrackExist(track: trackObject) { trackRepo.deleteTrack(track: trackObject)}
-       else { trackRepo.saveTrack(track: trackObject)}
-       getAllTracks()
+        if checkIsTrackExist(track: trackObject) { trackRepo.deleteTrack(track: trackObject)}
+        else { trackRepo.saveTrack(track: trackObject)}
+        getAllTracks()
     }
     
-  
+    
     func deleteAllNews() {
         trackRepo.deleteAll()
     }
@@ -56,24 +57,28 @@ class FavoriteViewModel : BaseViewModel{
         return trackRepo.checkIsTrackExist(track: track)
         
     }
-     func getCellViewModel(at indexPath: IndexPath) -> TrackCellViewModel? {
-           return cellViewModel[indexPath.row]
-       }
-       
-       
-       
-        func createCellsViewModels(items tracks:[Result]){
-           cellViewModel.removeAll()
-           for t in tracks {
+    func getCellViewModel(at indexPath: IndexPath) -> TrackCellViewModel? {
+        return cellViewModel[indexPath.row]
+    }
+    
+    func reloadCellViewModel(){
+        if let track = tracks.value {
+            createCellsViewModels(items: track)
+        }
+    }
+    
+    func createCellsViewModels(items tracks:[Result]){
+        cellViewModel.removeAll()
+        for t in tracks {
             let tracksChecker = checkTrackIsExist(track: t)
             let checkInListAlready = checkFavoriteInList(track: t)
-           
+            
             if tracksChecker && !checkInListAlready {
                 self.cellViewModel.append(TrackCellViewModel(track: t, isFavotite: tracksChecker))
             }
             self.observState?.value = .populated           }
-       }
-   
+    }
+    
     
     func checkFavoriteInList(track:Result) -> Bool{
         let trackCellVM = TrackCellViewModel(track: track)
@@ -98,5 +103,10 @@ class FavoriteViewModel : BaseViewModel{
     
     func getTrack(for index: Int) -> Result?{
         return tracks.value?[index]
+    }
+    
+    func didSelectedTrackToPlay(index:Int) {
+        selectedTrack.value = tracks.value?[index]
+        playList.value = (tracks.value , index) as! ([Result], Int)
     }
 }

@@ -21,14 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         SideMenuController.preferences.basic.shouldRespectLanguageDirection = false
-//        do {
-//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
-//            print("Playback OK")
-//            try AVAudioSession.sharedInstance().setActive(true)
-//            print("Session is Active")
-//        } catch {
-//            print(error)
-//        }
         configureRootViewController()
         
         return true
@@ -46,18 +38,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let mainStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
               window = UIWindow(frame: UIScreen.main.bounds)
-    //          window = UIWindow(windowScene: windowScene)
+    
                         
         
         if #available(iOS 13.0, *) {
-            let contentViewController = mainStoryboard.instantiateViewController(identifier: "ContentNavigation")
+            let contentViewController = HomeRouter.createModule()
+            
+            
             
                      let menuViewController = mainStoryboard.instantiateViewController(identifier: "MenuNavigation") as! SideMenuViewController
                      /// You should set navigation base with the actual navigation controller
-                     menuViewController.navigationBase = (contentViewController as! BaseNavigationController)
+
+            
+          //  contentViewController.addChild(HomeRouter.createModule())
+            
+            menuViewController.navigationBase = contentViewController
+           print(menuViewController)
                    
                        window?.rootViewController = SideMenuController(contentViewController: contentViewController, menuViewController: menuViewController)
-                     print("Root View Controller \(window?.rootViewController)")
                        window?.makeKeyAndVisible()
         } else {
             // Fallback on earlier versions

@@ -55,7 +55,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqK-rC-u93">
                             <rect key="frame" x="227" y="1.5" width="111.5" height="72"/>
-                            <state key="normal" image="playing">
+                            <state key="normal" image="pause">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -160,7 +160,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="outline_skip_next_white_36pt_3x" width="108" height="108"/>
         <image name="outline_skip_previous_white_36pt_3x" width="108" height="108"/>
-        <image name="playing" width="72" height="72"/>
+        <image name="pause" width="72" height="72"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
     </resources>
 </document>

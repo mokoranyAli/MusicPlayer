@@ -11,8 +11,8 @@ extension FavoriteViewController:TrackRealmDelegate {
     func toggleFavotire(cell: ITunesTrackCollectionViewCell) {
         print("HomeViewController TrackRealmDelegate toggleFavotire")
         guard let index = cell.indexPath?.item else { return }
-        if let trackObj = favoritViewModel.getTrack(for: index){
-            favoritViewModel.toggleTrackFromFavourite(trackObject: trackObj)
+        if let trackObj = favoritViewModel?.getTrack(for: index){
+            favoritViewModel?.toggleTrackFromFavourite(trackObject: trackObj)
         }
     }
    
@@ -21,16 +21,27 @@ extension FavoriteViewController:TrackRealmDelegate {
 extension FavoriteViewController : PlayButtonClickable {
     func didClickedOnPlayButton(at cell: ITunesTrackCollectionViewCell) {
         if let index = cell.indexPath?.item {
-            //favoritViewModel.didSelectedTrackToPlay(index: index)
+            favoritViewModel?.didSelectedTrackToPlay(index: index)
         }
     }
 }
 
 extension FavoriteViewController : SharButtonClickable {
     func didClickOnShareButton(at cell: ITunesTrackCollectionViewCell) {
-        guard let index = cell.indexPath?.item else { return }
-//        viewModel.shareItemOnIndexPath(index:index)
+    
+    }
+
+}
+
+extension FavoriteViewController : PlayerScreenDelegate {
+    func playerScreenDidDisappear(currentPlayingSong: Result) {
+        favoritViewModel?.reloadCellViewModel()
+        self.tabBarController?.navigationController?.navigationBar.isHidden = false
     }
     
+    func playerScreenWillAppear() {
+       self.tabBarController?.navigationController?.navigationBar.isHidden = true
+    }
     
+   
 }

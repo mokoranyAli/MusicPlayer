@@ -11,12 +11,18 @@ import UIKit
 extension HomeViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfCells
+        if viewModel?.numberOfCells == 0 {
+            collectionView.setEmptyView(title: "NO Result", message: "no tracks or artists with this name")
+        }
+        else {
+            collectionView.restore()
+        }
+        return viewModel?.numberOfCells ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ITunesTrackCollectionViewCell.cellID)", for: indexPath ) as! ITunesTrackCollectionViewCell
-        let cellVM = viewModel.getCellViewModel(at: indexPath)
+        let cellVM = viewModel?.getCellViewModel(at: indexPath)
                cell.trackCellViewModel = cellVM
         
         cell.playButtonDelegate = self
