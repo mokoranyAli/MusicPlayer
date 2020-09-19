@@ -11,13 +11,7 @@ import UIKit
 extension HomeViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if viewModel?.numberOfCells == 0 {
-            collectionView.setEmptyView(title: "NO Result", message: "no tracks or artists with this name")
-        }
-        else {
-            collectionView.restore()
-        }
-        return viewModel?.numberOfCells ?? 0
+       return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,12 +26,20 @@ extension HomeViewController : UICollectionViewDelegate , UICollectionViewDataSo
        
         return cell
     }
-
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+     if viewModel?.numberOfCells == 0 {
+               collectionView.setEmptyView(title: "NO Result", message: "no tracks or artists with this name")
+           }
+           else {
+               collectionView.restore()
+           }
+           return viewModel?.numberOfCells ?? 0
+  }
 
  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
  {
-     let width = (tracksCollectionView.frame.width) / 2
-     let height = tracksCollectionView.frame.height/3
+  let width = (tracksCollectionView.frame.width)
+     let height = tracksCollectionView.frame.height/4
 //     print("layout collectionViewLayout")
      return CGSize(width: width, height: height)
  }
